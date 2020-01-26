@@ -8,14 +8,20 @@ import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import gratigny.guillaume.deezeralbum.AdapterListener
 import gratigny.guillaume.deezeralbum.R
 import gratigny.guillaume.deezeralbum.models.DeezerData
 
-class MainRecyclerViewAdapater(context: Activity, dataList: List<DeezerData>) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MainRecyclerViewAdapter(
+    context: Activity,
+    dataList: List<DeezerData>,
+    listener: AdapterListener
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var mContext: Activity = context
     private var data: List<DeezerData> = dataList
+    private val listener: AdapterListener? = listener
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val rootView: View =
@@ -42,12 +48,17 @@ class MainRecyclerViewAdapater(context: Activity, dataList: List<DeezerData>) :
             ) //todo a changer plus tard & ajouter fade in
             .into(viewHolder.albumImage)
 
+        holder.albumImage.setOnClickListener {
+            listener?.onAlbumClicked(
+                data[position].id
+            )
+        }
     }
+
 
     internal class MainRecyclerViewViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         var albumImage: ImageView = itemView.findViewById(R.id.album_image)
-
     }
 
 }

@@ -12,10 +12,10 @@ class GridViewModel(private val apiService: DeezerRepository) : ViewModel() {
     var albumLiveData: MutableLiveData<PageResult> = MutableLiveData()
 
     init {
-        getData()
+        initData()
     }
 
-    private fun getData() {
+    private fun initData() {
         viewModelScope.launch {
             albumLiveData.value = apiService.getAlbumsList(null)
         }
