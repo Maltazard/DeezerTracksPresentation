@@ -10,7 +10,6 @@ import kotlinx.coroutines.launch
 class GridViewModel(private val apiService: DeezerRepository) : ViewModel() {
 
     var albumLiveData: MutableLiveData<PageResult> = MutableLiveData()
-    private val repository: DeezerRepository = apiService
 
     init {
         getData()
@@ -18,7 +17,7 @@ class GridViewModel(private val apiService: DeezerRepository) : ViewModel() {
 
     private fun getData() {
         viewModelScope.launch {
-            albumLiveData.value = repository.getAlbumsList(null)
+            albumLiveData.value = apiService.getAlbumsList(null)
         }
     }
 
