@@ -1,5 +1,8 @@
 package gratigny.guillaume.deezeralbum.models
 
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
 data class Artist(
     val id: Int,
     val name: String,
