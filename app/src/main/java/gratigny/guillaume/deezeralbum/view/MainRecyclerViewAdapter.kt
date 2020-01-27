@@ -50,7 +50,7 @@ class MainRecyclerViewAdapter(
 
         holder.albumImage.setOnClickListener {
             listener?.onAlbumClicked(
-                data[position].id
+                data[position]
             )
         }
     }
