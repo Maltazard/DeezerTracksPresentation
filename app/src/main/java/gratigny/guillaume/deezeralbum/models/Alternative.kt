@@ -24,7 +24,7 @@ data class Alternative(
     val type: String
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        TODO("artist"),
+        parcel.readParcelable<Artist>(Artist::class.java.classLoader),
         parcel.readByte() != 0.toByte(),
         parcel.readString(),
         parcel.readString(),
@@ -40,10 +40,10 @@ data class Alternative(
         parcel.readString(),
         parcel.readString(),
         parcel.readString()
-    ) {
-    }
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeParcelable(artist, 0)
         parcel.writeByte(if (available) 1 else 0)
         parcel.writeString(cover)
         parcel.writeString(cover_big)

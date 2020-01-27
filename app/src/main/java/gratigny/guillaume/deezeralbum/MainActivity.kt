@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import gratigny.guillaume.deezeralbum.models.Alternative
+import gratigny.guillaume.deezeralbum.models.Artist
 import gratigny.guillaume.deezeralbum.models.DeezerData
 import gratigny.guillaume.deezeralbum.models.PageResult
 import gratigny.guillaume.deezeralbum.view.MainRecyclerViewAdapter
@@ -43,7 +45,7 @@ class MainActivity : AppCompatActivity(), AdapterListener {
         val intent = Intent(this, DetailsAlbumActivity::class.java).apply {
             //todo put data here
             putExtra("id", data.id)
-            putExtra("object", data)
+            putExtra("object",  data)
         }
         startActivity(intent)
     }

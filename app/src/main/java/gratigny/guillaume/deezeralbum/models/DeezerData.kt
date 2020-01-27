@@ -26,8 +26,8 @@ data class DeezerData(
     val type: String
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        TODO("alternative"),
-        TODO("artist"),
+        parcel.readParcelable<Alternative>(Alternative::class.java.classLoader),
+        parcel.readParcelable<Artist>(Artist::class.java.classLoader),
         parcel.readByte() != 0.toByte(),
         parcel.readString(),
         parcel.readString(),
@@ -48,6 +48,8 @@ data class DeezerData(
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeParcelable(alternative, 0)
+        parcel.writeParcelable(artist, 0)
         parcel.writeByte(if (available) 1 else 0)
         parcel.writeString(cover)
         parcel.writeString(cover_big)
