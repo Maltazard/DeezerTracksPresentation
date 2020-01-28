@@ -6,14 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import gratigny.guillaume.deezeralbum.models.Alternative
-import gratigny.guillaume.deezeralbum.models.Artist
 import gratigny.guillaume.deezeralbum.models.DeezerData
 import gratigny.guillaume.deezeralbum.models.PageResult
 import gratigny.guillaume.deezeralbum.view.MainRecyclerViewAdapter
 import gratigny.guillaume.deezeralbum.viewmodel.GridViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
-
 
 class MainActivity : AppCompatActivity(), AdapterListener {
 
@@ -43,9 +40,9 @@ class MainActivity : AppCompatActivity(), AdapterListener {
 
     private fun launchDetailsActivity(data: DeezerData) {
         val intent = Intent(this, DetailsAlbumActivity::class.java).apply {
-            //todo put data here
+            //todo first is id for get the correct album, second is TEMPORARY before the use of cache or db
             putExtra("id", data.id)
-            putExtra("object",  data)
+            putExtra("object", data)
         }
         startActivity(intent)
     }
