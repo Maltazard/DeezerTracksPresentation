@@ -10,6 +10,10 @@ android {
         enabled true
     }
     defaultConfig {
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
         applicationId "gratigny.guillaume.deezeralbum"
         minSdkVersion 19
         targetSdkVersion 28
@@ -64,7 +68,7 @@ dependencies {
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:${retrofit}"
     implementation "com.squareup.retrofit2:converter-moshi:${retrofit}"
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.2'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.12.0'
 
     //Moshi
     implementation("com.squareup.moshi:moshi-kotlin:1.9.2") {

@@ -34,7 +34,7 @@ class DetailsAlbumActivity : AppCompatActivity() {
             .placeholder(
                 ContextCompat.getDrawable(
                     this,
-                    R.drawable.ic_launcher_foreground
+                    R.mipmap.placeholder
                 )
             ).into(back_image)
     }
