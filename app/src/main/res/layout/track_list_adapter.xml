@@ -15,8 +15,8 @@
 
     <View
         android:id="@+id/separator"
-        android:layout_width="match_parent"
+        android:layout_width="100dp"
         android:layout_height="1dp"
-        android:layout_gravity="bottom"
-        android:background="@android:color/white" />
+        android:layout_gravity="bottom|center_horizontal"
+        android:background="@android:color/darker_gray" />
 </FrameLayout>
