@@ -47,7 +47,7 @@ class MainRecyclerViewAdapter(
             .placeholder(
                 ContextCompat.getDrawable(
                     mContext,
-                    R.mipmap.placeholder
+                    R.drawable.placeholder_cover
                 )
             ) //todo placeholder ?
             .into(viewHolder.albumImage)

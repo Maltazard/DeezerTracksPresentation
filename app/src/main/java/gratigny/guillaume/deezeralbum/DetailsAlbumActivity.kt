@@ -53,7 +53,7 @@ class DetailsAlbumActivity : AppCompatActivity() {
             .placeholder(
                 ContextCompat.getDrawable(
                     this,
-                    R.mipmap.placeholder
+                    R.drawable.placeholder_cover
                 )
             ).into(back_image)
     }
