@@ -6,6 +6,7 @@ import com.squareup.moshi.JsonClass
 data class PageResult(
     val checksum: String,
     val data: List<DeezerData>,
-    val next: String,
+    val prev: String?,
+    val next: String?,
     val total: Int
 )

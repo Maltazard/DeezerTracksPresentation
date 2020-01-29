@@ -2,6 +2,8 @@ package gratigny.guillaume.deezeralbum
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -12,6 +14,7 @@ import gratigny.guillaume.deezeralbum.view.MainRecyclerViewAdapter
 import gratigny.guillaume.deezeralbum.view.MarginItemDecoration
 import gratigny.guillaume.deezeralbum.viewmodel.GridViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
+
 
 class MainActivity : AppCompatActivity(), AdapterListener {
 
@@ -33,6 +36,22 @@ class MainActivity : AppCompatActivity(), AdapterListener {
             recyclerView.layoutManager = GridLayoutManager(this, 3)
             recyclerView.adapter = recyclerViewAdapter
             recyclerView.addItemDecoration(MarginItemDecoration(resources.getDimension(R.dimen.padding_default).toInt()))
+
+            recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    super.onScrollStateChanged(recyclerView, newState)
+                    if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
+                        Log.e("AT THE BOTTOM", " AT THE BOTTOM") //todo new request
+                        if (deezerData != null) {
+                            if (deezerData.next != null) {
+                                viewModel.getData(viewModel.getIndex(deezerData.next))
+                            }
+                        }
+                    }
+                }
+
+            })
+
         }
 
     override fun onAlbumClicked(data: DeezerData) {
