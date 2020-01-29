@@ -16,7 +16,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class MainActivity : AppCompatActivity(), AdapterListener {
 
     private lateinit var recyclerView: RecyclerView
-    lateinit var recyclerViewAdapter: MainRecyclerViewAdapter
+    private lateinit var recyclerViewAdapter: MainRecyclerViewAdapter
     private val viewModel: GridViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {

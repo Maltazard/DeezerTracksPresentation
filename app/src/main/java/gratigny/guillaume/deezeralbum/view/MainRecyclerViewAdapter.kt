@@ -59,7 +59,6 @@ class MainRecyclerViewAdapter(
         }
     }
 
-
     internal class MainRecyclerViewViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         var albumImage: ImageView = itemView.findViewById(R.id.album_image)

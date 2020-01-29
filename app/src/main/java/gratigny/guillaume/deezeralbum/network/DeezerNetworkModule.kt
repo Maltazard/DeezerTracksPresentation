@@ -8,7 +8,7 @@ class DeezerNetworkModule {
     fun getDeezerApiService(): DeezerApiService {
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://api.deezer.com/2.0/user/2529/")
+            .baseUrl("http://api.deezer.com/2.0/")
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
 
