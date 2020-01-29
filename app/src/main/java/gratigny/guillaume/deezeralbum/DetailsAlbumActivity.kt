@@ -2,12 +2,14 @@ package gratigny.guillaume.deezeralbum
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import com.bumptech.glide.Glide
 import gratigny.guillaume.deezeralbum.databinding.ActivityDetailsAlbumBinding
 import gratigny.guillaume.deezeralbum.models.DeezerData
 import gratigny.guillaume.deezeralbum.viewmodel.DetailsAlbumViewModel
+import kotlinx.android.synthetic.main.activity_details_album.*
 import org.koin.android.viewmodel.ext.android.viewModel
-
 
 class DetailsAlbumActivity : AppCompatActivity() {
 
@@ -22,5 +24,19 @@ class DetailsAlbumActivity : AppCompatActivity() {
         val obj: DeezerData = intent?.extras?.getParcelable("object")!!
         viewModel.setData(obj)
 
+        setView(obj)
     }
+
+    private fun setView(obj: DeezerData) {
+        Glide.with(this)
+            .asDrawable()
+            .load(obj.cover_xl)
+            .placeholder(
+                ContextCompat.getDrawable(
+                    this,
+                    R.drawable.ic_launcher_foreground
+                )
+            ).into(back_image)
+    }
+
 }

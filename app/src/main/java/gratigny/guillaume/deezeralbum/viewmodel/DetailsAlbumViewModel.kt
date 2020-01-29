@@ -10,6 +10,7 @@ class DetailsAlbumViewModel(private val apiService: DeezerRepository) : ViewMode
     var albumData: MutableLiveData<DeezerData> = MutableLiveData()
 
     fun setData(selectedAlbum: DeezerData) {
+        //todo si binding ne marche pas ici, changer les données ici
         albumData.value = selectedAlbum
 
     }

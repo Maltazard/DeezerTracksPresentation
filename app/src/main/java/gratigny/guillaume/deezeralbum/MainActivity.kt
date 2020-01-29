@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import gratigny.guillaume.deezeralbum.models.DeezerData
 import gratigny.guillaume.deezeralbum.models.PageResult
 import gratigny.guillaume.deezeralbum.view.MainRecyclerViewAdapter
+import gratigny.guillaume.deezeralbum.view.MarginItemDecoration
 import gratigny.guillaume.deezeralbum.viewmodel.GridViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -29,8 +30,9 @@ class MainActivity : AppCompatActivity(), AdapterListener {
     private var dataUpdateObserver: Observer<PageResult> =
         Observer { deezerData ->
             recyclerViewAdapter = MainRecyclerViewAdapter(this, deezerData.data, this)
-            recyclerView.layoutManager = GridLayoutManager(this, 2)
+            recyclerView.layoutManager = GridLayoutManager(this, 3)
             recyclerView.adapter = recyclerViewAdapter
+            recyclerView.addItemDecoration(MarginItemDecoration(resources.getDimension(R.dimen.padding_default).toInt()))
         }
 
     override fun onAlbumClicked(data: DeezerData) {
