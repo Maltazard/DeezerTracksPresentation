@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import gratigny.guillaume.deezeralbum.models.DeezerData
 import gratigny.guillaume.deezeralbum.models.PageResult
 import gratigny.guillaume.deezeralbum.network.DeezerRepository
+import gratigny.guillaume.deezeralbum.network.ResultWrapper
 import kotlinx.coroutines.launch
 
 class GridViewModel(private val apiService: DeezerRepository) : ViewModel() {
@@ -20,15 +21,35 @@ class GridViewModel(private val apiService: DeezerRepository) : ViewModel() {
 
     fun getData(index: Int?) {
         viewModelScope.launch {
-            albumLiveData.value = apiService.getAlbumsList(index) //todo mettre ici la fct
+            albumLiveData.value = addInAlbumList(
+                albumLiveData,
+                apiService.getAlbumsList(index)
+            ) //todo Delete la add in list
         }
     }
 
-/*    private fun addInAlbumLsit(album: PageResult) {
+    private fun addInAlbumList(data: MutableLiveData<PageResult>, album: PageResult): PageResult? {
+        return if (data.value != null) {
+            val oldData: MutableList<DeezerData> = data.value!!.data as MutableList
+            val list = album.data as MutableList
+            oldData.addAll(list)
+            album.data = oldData
+            album
+        } else {
+            album
+        }
+
         //todo faire un fct pour add les data ajouté dans lancien live data
-        albumAll.data.add(album.data)
-        albumLiveData.value = albumAll
-    }*/
+    }
+
+
+
+
+
+
+
+
+
 
     fun getIndex(str: String): Int {
         return str.split("index=").last().toInt()

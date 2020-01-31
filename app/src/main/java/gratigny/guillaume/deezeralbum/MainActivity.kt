@@ -2,8 +2,8 @@ package gratigny.guillaume.deezeralbum
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity(), AdapterListener {
     private lateinit var recyclerView: RecyclerView
     private lateinit var recyclerViewAdapter: MainRecyclerViewAdapter
     private val viewModel: GridViewModel by viewModel()
+    var flagDecoration = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,27 +36,30 @@ class MainActivity : AppCompatActivity(), AdapterListener {
             recyclerViewAdapter = MainRecyclerViewAdapter(this, deezerData.data, this)
             recyclerView.layoutManager = GridLayoutManager(this, 3)
             recyclerView.adapter = recyclerViewAdapter
-            recyclerView.addItemDecoration(MarginItemDecoration(resources.getDimension(R.dimen.padding_default).toInt()))
 
-            recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            if (!flagDecoration) {
+                recyclerView.addItemDecoration(MarginItemDecoration(resources.getDimension(R.dimen.padding_default).toInt()))
+                flagDecoration = true
+            }
+
+            recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {//todo delete if not resolve
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     super.onScrollStateChanged(recyclerView, newState)
                     if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
-                        Log.e("AT THE BOTTOM", " AT THE BOTTOM") //todo new request
-                        if (deezerData != null) {
+                        if (deezerData != null) { //todo delete if not resolve
                             if (deezerData.next != null) {
+                                Log.e("TRIGGER", "TRIGGER")
                                 viewModel.getData(viewModel.getIndex(deezerData.next))
                             }
                         }
                     }
                 }
 
-            })
+            })//todo delete if not resolve
 
         }
 
     override fun onAlbumClicked(data: DeezerData) {
-        //todo choose data to pass to the second activity
         launchDetailsActivity(data)
     }
 

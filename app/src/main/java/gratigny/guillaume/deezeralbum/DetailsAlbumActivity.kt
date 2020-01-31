@@ -43,7 +43,6 @@ class DetailsAlbumActivity : AppCompatActivity() {
             trackViewAdapter = TrackListAdapter(this, listOfTrack.data)
             trackListRecyclerView.layoutManager = LinearLayoutManager(this)
             trackListRecyclerView.adapter = trackViewAdapter
-            //trackListRecyclerView.addItemDecoration(MarginItemDecoration(resources.getDimension(R.dimen.padding_default).toInt()))
         }
 
     private fun setView(obj: DeezerData) {

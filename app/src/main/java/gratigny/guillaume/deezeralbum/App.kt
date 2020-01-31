@@ -1,6 +1,5 @@
 package gratigny.guillaume.deezeralbum
 
-import android.app.Application
 import androidx.multidex.MultiDexApplication
 import gratigny.guillaume.deezeralbum.network.DeezerNetworkModule
 import gratigny.guillaume.deezeralbum.network.DeezerRepository

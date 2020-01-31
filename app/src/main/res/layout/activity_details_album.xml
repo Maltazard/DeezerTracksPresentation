@@ -15,124 +15,103 @@
 
 
     </data>
-<!--//todo set behavior of the coordinator scroll-->
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/coordinator"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/background_grad"
+        tools:context=".DetailsAlbumActivity">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+
+        <com.github.florent37.diagonallayout.DiagonalLayout
+            android:id="@+id/back_diag"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/darkGrey"
-            tools:context=".DetailsAlbumActivity">
+            android:layout_height="250dp"
+            app:diagonal_angle="10"
+            app:diagonal_direction="left"
+            app:diagonal_position="bottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-
-            <com.github.florent37.diagonallayout.DiagonalLayout
-                android:id="@+id/back_diag"
+            <ImageView
+                android:id="@+id/back_image"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                app:diagonal_angle="10"
-                app:diagonal_direction="left"
-                app:diagonal_position="bottom"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
 
-                <ImageView
-                    android:id="@+id/back_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop" />
+        </com.github.florent37.diagonallayout.DiagonalLayout>
 
-            </com.github.florent37.diagonallayout.DiagonalLayout>
+        <TextView
+            android:id="@+id/album_title"
+            style="@style/Title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:text='@{data.albumData.title}'
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/artist"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/back_diag" />
 
-            <TextView
-                android:id="@+id/album_title"
-                style="@style/Title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="32dp"
-                android:text='@{data.albumData.title}'
-                android:textAlignment="center"
-                app:layout_constraintBottom_toTopOf="@+id/artist"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/back_diag" />
+        <TextView
+            android:id="@+id/artist"
+            style="@style/BigText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            android:text='@{data.albumData.artist.name}'
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/release_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/album_title" />
 
-            <TextView
-                android:id="@+id/artist"
-                style="@style/BigText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="32dp"
-                android:text='@{data.albumData.artist.name}'
-                android:textAlignment="center"
-                app:layout_constraintBottom_toTopOf="@+id/release_date"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/album_title" />
+        <TextView
+            android:id="@+id/release_date"
+            style="@style/Text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            android:text='@{`Released the ` + data.albumData.release_date}'
+            app:layout_constraintBottom_toTopOf="@+id/number_tracks"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/artist" />
 
-            <TextView
-                android:id="@+id/record_type"
-                style="@style/Text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="24dp"
-                android:text='@{data.albumData.record_type}'
-                app:layout_constraintEnd_toStartOf="@+id/release_date"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/artist" />
+        <TextView
+            android:id="@+id/number_tracks"
+            style="@style/Text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            android:text='@{`Number of tracks : ` + String.valueOf(data.albumData.nb_tracks)}'
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/release_date" />
 
-            <TextView
-                android:id="@+id/release_date"
-                style="@style/Text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="82dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="32dp"
-                android:text='@{`Released the ` + data.albumData.release_date}'
-                app:layout_constraintBottom_toTopOf="@+id/number_tracks"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/record_type"
-                app:layout_constraintTop_toBottomOf="@+id/artist" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tracklist_recycler"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/number_tracks" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/number_tracks"
-                style="@style/Text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="32dp"
-                android:text='@{`Number of tracks : ` + String.valueOf(data.albumData.nb_tracks)}'
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/release_date" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/tracklist_recycler"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginTop="32dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/number_tracks" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

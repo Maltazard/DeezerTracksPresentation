@@ -19,7 +19,7 @@ data class DeezerData(
     val link: String,
     val nb_tracks: Int,
     val record_type: String,
-    val release_date: String,
+    var release_date: String,
     val time_add: Int,
     val title: String,
     val tracklist: String,

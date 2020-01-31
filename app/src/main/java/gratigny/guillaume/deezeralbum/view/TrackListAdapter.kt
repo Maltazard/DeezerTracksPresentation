@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import gratigny.guillaume.deezeralbum.R
 import gratigny.guillaume.deezeralbum.models.TrackData
+import java.util.concurrent.TimeUnit
 
 class TrackListAdapter(
     context: Activity,
@@ -31,11 +32,21 @@ class TrackListAdapter(
         val specificTitle = data[position]
         val viewHolder: TrackListRecyclerViewViewHolder = holder as TrackListRecyclerViewViewHolder
 
-        viewHolder.title.text = specificTitle.title
+        viewHolder.title.text = specificTitle.title.trim()
+        viewHolder.number.text = specificTitle.track_position.toString().trim() + "."
+
+
+        val time = String.format("%d:%d",
+            TimeUnit.SECONDS.toMinutes(specificTitle.duration.toLong()),
+            TimeUnit.SECONDS.toSeconds(specificTitle.duration.toLong()) - TimeUnit.MINUTES.toSeconds(TimeUnit.SECONDS.toMinutes(specificTitle.duration.toLong()))
+        )
+        viewHolder.duration.text = time
     }
 
     internal class TrackListRecyclerViewViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         var title: TextView = itemView.findViewById(R.id.track_title)
+        var number: TextView = itemView.findViewById(R.id.track_number)
+        var duration: TextView = itemView.findViewById(R.id.duration)
     }
 }
