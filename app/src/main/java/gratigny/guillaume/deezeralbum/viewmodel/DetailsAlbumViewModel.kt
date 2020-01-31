@@ -13,6 +13,7 @@ class DetailsAlbumViewModel(private val apiService: DeezerRepository) : ViewMode
 
     var albumData: MutableLiveData<DeezerData> = MutableLiveData()
     var trackList: MutableLiveData<TrackList> = MutableLiveData()
+    var isError: MutableLiveData<Boolean> = MutableLiveData(false)
 
     /**
      * Set data in a object before calling getAlbumTrackList for having the details of a tracklist
@@ -42,6 +43,8 @@ class DetailsAlbumViewModel(private val apiService: DeezerRepository) : ViewMode
             viewModelScope.launch {
                 trackList.postValue(apiService.getAlbumTrackList(id))
             }
+        } else {
+            isError.value = true
         }
     }
 }

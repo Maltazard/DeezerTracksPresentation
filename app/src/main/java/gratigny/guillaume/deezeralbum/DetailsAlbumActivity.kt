@@ -1,6 +1,8 @@
 package gratigny.guillaume.deezeralbum
 
 import android.os.Bundle
+import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -20,6 +22,7 @@ class DetailsAlbumActivity : AppCompatActivity() {
 
     private lateinit var trackListRecyclerView: RecyclerView
     private lateinit var trackViewAdapter: TrackListAdapter
+    private lateinit var errorText: TextView
 
     private lateinit var bi: ActivityDetailsAlbumBinding
     private val viewModel: DetailsAlbumViewModel by viewModel()
@@ -29,11 +32,13 @@ class DetailsAlbumActivity : AppCompatActivity() {
         bi = DataBindingUtil.setContentView(this, R.layout.activity_details_album)
         bi.data = viewModel
         trackListRecyclerView = findViewById(R.id.tracklist_recycler)
+        errorText = findViewById(R.id.error_text)
 
         val obj: DeezerData = intent?.extras?.getParcelable("object")!!
         viewModel.setData(obj)
 
         viewModel.trackList.observe(this, trackListObserver)
+        viewModel.isError.observe(this, noDataObserver)
         setView(obj)
     }
 
@@ -45,6 +50,17 @@ class DetailsAlbumActivity : AppCompatActivity() {
             trackViewAdapter = TrackListAdapter(this, listOfTrack.data)
             trackListRecyclerView.layoutManager = LinearLayoutManager(this)
             trackListRecyclerView.adapter = trackViewAdapter
+        }
+
+    /**
+     * Observer for displaying a message in case of missing trackList
+     */
+    private var noDataObserver: Observer<Boolean> =
+        Observer { noData ->
+            if (noData == true) {
+                trackListRecyclerView.visibility = View.GONE
+                error_text.visibility = View.VISIBLE
+            }
         }
 
     /**
