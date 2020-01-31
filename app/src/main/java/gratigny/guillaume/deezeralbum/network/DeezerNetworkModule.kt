@@ -5,6 +5,11 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 class DeezerNetworkModule {
 
+    /**
+     * Create an instance of retrofit
+     *
+     * @return the API service
+     */
     fun getDeezerApiService(): DeezerApiService {
 
         val retrofit = Retrofit.Builder()

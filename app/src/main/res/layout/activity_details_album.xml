@@ -9,11 +9,6 @@
             name="data"
             type="gratigny.guillaume.deezeralbum.viewmodel.DetailsAlbumViewModel" />
 
-        <variable
-            name="date"
-            type="gratigny.guillaume.deezeralbum.extension.StringKt" />
-
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

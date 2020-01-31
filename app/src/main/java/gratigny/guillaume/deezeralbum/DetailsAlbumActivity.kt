@@ -1,7 +1,6 @@
 package gratigny.guillaume.deezeralbum
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -38,6 +37,9 @@ class DetailsAlbumActivity : AppCompatActivity() {
         setView(obj)
     }
 
+    /**
+     * Create an observer for the LiveData of the trackList and set the recyclerView & adapter
+     */
     private var trackListObserver: Observer<TrackList> =
         Observer { listOfTrack ->
             trackViewAdapter = TrackListAdapter(this, listOfTrack.data)
@@ -45,6 +47,11 @@ class DetailsAlbumActivity : AppCompatActivity() {
             trackListRecyclerView.adapter = trackViewAdapter
         }
 
+    /**
+     * Set the cover image
+     *
+     * @param obj the album data
+     */
     private fun setView(obj: DeezerData) {
         Glide.with(this)
             .asDrawable()

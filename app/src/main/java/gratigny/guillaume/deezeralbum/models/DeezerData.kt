@@ -44,8 +44,7 @@ data class DeezerData(
         parcel.readString(),
         parcel.readString(),
         parcel.readString()
-    ) {
-    }
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeParcelable(alternative, 0)

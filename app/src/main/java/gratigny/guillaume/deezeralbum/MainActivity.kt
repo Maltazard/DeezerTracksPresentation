@@ -2,8 +2,6 @@ package gratigny.guillaume.deezeralbum
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Parcelable
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -31,6 +29,9 @@ class MainActivity : AppCompatActivity(), AdapterListener {
         viewModel.albumLiveData.observe(this, dataUpdateObserver)
     }
 
+    /**
+     * Observer of PageResult and set the recyclerView & adapter inside
+     */
     private var dataUpdateObserver: Observer<PageResult> =
         Observer { deezerData ->
             recyclerViewAdapter = MainRecyclerViewAdapter(this, deezerData.data, this)
@@ -42,30 +43,21 @@ class MainActivity : AppCompatActivity(), AdapterListener {
                 flagDecoration = true
             }
 
-            recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {//todo delete if not resolve
-                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                    super.onScrollStateChanged(recyclerView, newState)
-                    if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
-                        if (deezerData != null) { //todo delete if not resolve
-                            if (deezerData.next != null) {
-                                Log.e("TRIGGER", "TRIGGER")
-                                viewModel.getData(viewModel.getIndex(deezerData.next))
-                            }
-                        }
-                    }
-                }
-
-            })//todo delete if not resolve
-
         }
 
+    /**
+     * Action triggered when an album is clicked
+     */
     override fun onAlbumClicked(data: DeezerData) {
         launchDetailsActivity(data)
     }
 
+    /**
+     * Launch the DetailsAlbumActivity with the data of an album
+     * @param data the info on an album
+     */
     private fun launchDetailsActivity(data: DeezerData) {
         val intent = Intent(this, DetailsAlbumActivity::class.java).apply {
-            //todo first is id for get the correct album, second is TEMPORARY before the use of cache or db
             putExtra("id", data.id)
             putExtra("object", data)
         }

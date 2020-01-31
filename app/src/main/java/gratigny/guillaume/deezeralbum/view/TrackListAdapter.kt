@@ -36,9 +36,12 @@ class TrackListAdapter(
         viewHolder.number.text = specificTitle.track_position.toString().trim() + "."
 
 
-        val time = String.format("%d:%d",
+        val time = String.format(
+            "%d:%d",
             TimeUnit.SECONDS.toMinutes(specificTitle.duration.toLong()),
-            TimeUnit.SECONDS.toSeconds(specificTitle.duration.toLong()) - TimeUnit.MINUTES.toSeconds(TimeUnit.SECONDS.toMinutes(specificTitle.duration.toLong()))
+            TimeUnit.SECONDS.toSeconds(specificTitle.duration.toLong()) - TimeUnit.MINUTES.toSeconds(
+                TimeUnit.SECONDS.toMinutes(specificTitle.duration.toLong())
+            )
         )
         viewHolder.duration.text = time
     }

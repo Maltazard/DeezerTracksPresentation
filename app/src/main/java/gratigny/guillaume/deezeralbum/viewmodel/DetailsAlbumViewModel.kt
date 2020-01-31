@@ -8,20 +8,25 @@ import gratigny.guillaume.deezeralbum.models.DeezerData
 import gratigny.guillaume.deezeralbum.models.TrackList
 import gratigny.guillaume.deezeralbum.network.DeezerRepository
 import kotlinx.coroutines.launch
-import java.util.concurrent.TimeUnit
 
 class DetailsAlbumViewModel(private val apiService: DeezerRepository) : ViewModel() {
 
     var albumData: MutableLiveData<DeezerData> = MutableLiveData()
     var trackList: MutableLiveData<TrackList> = MutableLiveData()
 
+    /**
+     * Set data in a object before calling getAlbumTrackList for having the details of a tracklist
+     * @param selectedAlbum an album
+     */
     fun setData(selectedAlbum: DeezerData) {
         selectedAlbum.release_date = selectedAlbum.release_date.dateFormat()
-        //todo si binding ne marche pas ici, changer les données ici POUR L4ALBUM
         albumData.value = selectedAlbum
         getAlbumTrackList()
     }
 
+    /**
+     * Check if the trackList is available and if it is request the details
+     */
     private fun getAlbumTrackList() {
         var id: Int? = null
         if (albumData.value != null) {

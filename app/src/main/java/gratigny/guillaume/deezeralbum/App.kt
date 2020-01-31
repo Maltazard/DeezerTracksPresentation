@@ -12,6 +12,9 @@ import org.koin.dsl.module
 
 class App : MultiDexApplication() {
 
+    /**
+     * Create a list of module for the di
+     */
     private var listModules = module {
         single { DeezerNetworkModule().getDeezerApiService() }
         single { DeezerRepository(get()) }

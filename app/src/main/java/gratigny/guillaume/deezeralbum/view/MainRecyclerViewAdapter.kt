@@ -4,7 +4,6 @@ import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -49,7 +48,7 @@ class MainRecyclerViewAdapter(
                     mContext,
                     R.drawable.placeholder_cover
                 )
-            ) //todo placeholder ?
+            )
             .into(viewHolder.albumImage)
 
         holder.albumImage.setOnClickListener {
